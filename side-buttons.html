@@ -12,13 +12,14 @@
   	html, body {
   		height: 100%;
   		margin: 0px;
+  		z-index: 999;
   	}
   	.side-menu {
   		border-right: 4px solid black;
   		height: 100%;
   		background-color: #293d57;
   	}
-  	.side-menu a {
+  	.side-menu button {
   		color: #fff;
   		font-size: 1.5em;
   		font-family: 'Dancing Script', cursive;
@@ -36,11 +37,22 @@
 	<body>
 		<div class="side-menu">
 			<div class="my-activity">
-				<a href="#">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Моя активность</a>
+				<button id="my-activity-btn">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Моя активность</button>
 			</div>
 			<div class="add-activity">
-				<a href="#">&ensp;Добавить активность</a>
+				<button id="add-activity-btn">&ensp;Добавить активность</button>
 			</div>
 		</div>
+		<script>
+			let myActivityBtn = document.querySelector('#my-activity-btn');
+			myActivityBtn.addEventListener('click', function() {
+				window.parent.location = 'index.html';
+			});
+
+			let addActivityBtn = document.querySelector('#add-activity-btn');
+			addActivityBtn.addEventListener('click', function() {
+				window.parent.location = 'add.html';
+			});
+		</script>
 	</body>
 </html>
