@@ -12,7 +12,7 @@
   	html, body {
   		height: 100%;
   		margin: 0px;
-  		z-index: 999;
+  		z-index: 2;
   	}
   	.side-menu {
   		border-right: 4px solid black;
@@ -46,12 +46,12 @@
 		<script>
 			let myActivityBtn = document.querySelector('#my-activity-btn');
 			myActivityBtn.addEventListener('click', function() {
-				window.parent.location = 'index.html';
+				window.parent.location = 'my-activity.html';
 			});
 
 			let addActivityBtn = document.querySelector('#add-activity-btn');
 			addActivityBtn.addEventListener('click', function() {
-				window.parent.location = 'add.html';
+				window.parent.location = 'add-activity.html';
 			});
 		</script>
 	</body>
