@@ -1,30 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower&display=swap');
 *,*:before,*:after{
 	padding: 0;
 	margin: 0;
 	border: 0;
 	box-sizing: border-box;
 }
-@import url('https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower&display=swap');
-html,body{
-	height: 100%;
+html, body{
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 	margin: 0px;
-	z-index: 1;
-	overflow: hidden;
-}
-.wrapper{
-	margin: auto;
-	height: 100%;
-}
-.menuWrap {
 }
 .mainPart {
-	width: 80%;
 	background-color: grey;
 }
+
 .sideMenu {
 	border-right: 4px solid black;
-	height: 100%;
 	background-color: #1e5f94;
 }
 .button {
@@ -39,15 +29,91 @@ html,body{
 	background: linear-gradient(180deg, #eef3ca 50%, #f1f578 100%);
 }
 .button:hover{
+	color: brown;
 	background: linear-gradient(180deg, #FCFFE6 50%, #E6E6E6 100%);
 }
 .tablePage {
 	display: flex;
+	margin: auto;
 }
-.titleOfPage {
+.title {
 	font-size: 2em;
-	color: purple;
+	color: rgb(99, 12, 99);
 	font-weight: 800;
-	margin: 20px 0px 20px 50px;
+	margin: 20px auto;
+	text-align: center;
 	font-family: 'Indie Flower';
+}
+.tablePage__table {
+	margin: auto 10px;
+	border: 1px solid black;
+	height: 100vh;
+	text-align: center;
+}
+.tablePage__table th {
+	font-weight: 600;
+	font-size: 1.3em;
+	font-family: 'Indie Flower', cursive;
+	border: 1px solid black;
+	height: 10%;
+	padding: 10px;
+	color:rgb(43, 43, 141);
+}
+.tablePage__table td {
+	border: 1px solid black;
+}
+.menuWrap {
+	height: 100vh;
+  }
+.addFormPage {
+	background-color: grey;
+	display: flex;
+}
+.addFormPage__formBlock {
+	width: 70%;
+}
+.addFormPage__form {
+	text-align: center;
+}
+.addFormPage__title {
+	font-weight: 700;
+	font-size: 1.7em;
+	font-family: 'Indie Flower', cursive;
+}
+
+.addFormPage__label-timeStart,
+.addFormPage__label-date,
+.addFormPage__label-timeEnd { 
+	font-size: 1.3em;
+	font-weight: 500;
+	font-family: 'Indie Flower', cursive;
+}
+
+.addFormPage__sendButton {
+	border: 1px solid rgb(0, 0, 0);
+  	padding: 15px 15px;
+	margin: 10px auto 10px 10px;
+	width: 55%;
+	color: #708090;
+	box-shadow: 0 0 2px 1px #BDBDBD;
+	background: linear-gradient(180deg, #eef3ca 50%, #f1f578 100%);
+}
+.addFormPage__sendButton:hover {
+	color: #266fb8;
+	background: linear-gradient(180deg, #abe979 50%, #56ec51 100%);
+}
+.button__wrapper {
+	justify-content: center;
+	align-items: center;
+	
+}
+.addFormPage__textArea-wrapper {
+	margin: auto 5%;
+}
+.addFormPage__textArea-theme {
+	min-width: 60%;
+	max-width: 100%;
+	min-height: 50px;
+	height: 100%;
+	width: 100%;
 }
