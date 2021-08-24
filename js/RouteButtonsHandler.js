@@ -1,6 +1,6 @@
 let myActivityBtn = document.querySelector('.myActivity__btn');
 myActivityBtn.addEventListener('click', function() {
-    window.parent.location = 'my-activity.html';
+    window.parent.location = 'index.html';
 });
 
 let addActivityBtn = document.querySelector('.addActivity__btn');
