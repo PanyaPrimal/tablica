@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-          <meta charset="utf-8">
-          <title>Progress of skills add</title>
+            <meta charset="utf-8">
+            <title>Progress of skills add</title>
         <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body>  
     <div class="wrapper">
         <div class="addFormPage">
             <div class="addFormPage__menuWrap menuWrap">
@@ -21,23 +21,31 @@
                             <label class="addFormPage__label-date" for="date">
                                 Дата
                             </label>
-                            <input type="date" id="date" placeholder="Дата" required="o kurwa" size="50">
+                            <input type="date" id="date" placeholder="Дата" size="50">
                         </p>
                         <p>
-                            <label class="addFormPage__label-timeStart" for="date">
+                            <label class="addFormPage__label-timeStart" for="start-time">
                                 Время начала
                             </label>
-                            <input type="time" id="start"  required="o kurwa" time="">
+                            <input type="time" id="start-time">
                             </p>
                         <p>
-                            <label class="addFormPage__label-timeEnd" for="date">
+                            <label class="addFormPage__label-timeEnd" for="end-time">
                                 Время окончания
                             </label>
-                            <input type="time" id="end" required="o kurwa">
+                            <input type="time" id="end-time">
                         </p>
                         <p>
                             <div class="addFormPage__textArea-wrapper">
-                                <textarea class="addFormPage__textArea-theme" cols="0" rows="10" name="theme" placeholder="Тема и твои впечатления" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">Тема и твои впечатления
+                                <textarea 
+                                    class="addFormPage__textArea-theme" 
+                                    cols="0"
+                                    rows="10"
+                                    name="theme"
+                                    placeholder="Тема и твои впечатления"
+                                    onfocus="if(this.value==this.defaultValue)this.value='';" 
+                                    onblur="if(this.value=='')this.value=this.defaultValue;">
+                                        Тема и твои впечатления
                                 </textarea>
                             </div>
                         </p>
