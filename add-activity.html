@@ -9,7 +9,7 @@
     <div class="wrapper">
         <div class="addFormPage">
             <div class="addFormPage__menuWrap menuWrap">
-                <object type="text/html" data="side-buttons.html"></object>
+                <object class="sideButtonsBlock" type="text/html" data="side-buttons.html"></object>
             </div>
             <div class="addFormPage__formBlock">
                 <form class="add-form-page__form">
@@ -21,21 +21,20 @@
                             <label class="addFormPage__label-date" for="date">
                                 Дата
                             </label>
-                            <input type="date" id="date" placeholder="Дата" size="50">
+                            <input required type="date" id="date" placeholder="Дата" size="50">
                         </p>
                         <p>
                             <label class="addFormPage__label-timeStart" for="start-time">
                                 Время начала
                             </label>
-                            <input type="time" id="start-time">
+                            <input required type="time" id="start-time">
                             </p>
                         <p>
                             <label class="addFormPage__label-timeEnd" for="end-time">
                                 Время окончания
                             </label>
-                            <input type="time" id="end-time">
+                            <input required type="time" id="end-time">
                         </p>
-                        <p>
                             <div class="addFormPage__textArea-wrapper">
                                 <textarea 
                                     class="addFormPage__textArea-theme" 
@@ -48,7 +47,6 @@
                                         Тема и твои впечатления
                                 </textarea>
                             </div>
-                        </p>
                     </fieldset>
                     <div class="button__wrapper">
                     <input class="addFormPage__sendButton button" type="submit" value="Отправить">
