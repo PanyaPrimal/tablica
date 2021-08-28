@@ -17,13 +17,11 @@ body {
     padding-left: 20%;
 }
 
-.sideMenu-wrapper {
+.side-menu__wrapper {
     border-right: 4px solid #000000;
     background-color: #1e5f94;
     height: 100vh;
-    padding: 5% 0 0 4%;
-}
-.sideMenu {
+    padding: 5% 5% 0 5%;
 }
 .sideButtonsBlock {
     height: 100vh;
