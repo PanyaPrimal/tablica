@@ -12,39 +12,39 @@ body {
     height: 100vh;
     min-height: 100%;
 }
-.mainPart {
+.table-section {
     background-color: #d3d3d3;
     padding-left: 20%;
 }
-
 .side-menu__wrapper {
     border-right: 4px solid #000000;
     background-color: #1e5f94;
     height: 100vh;
     padding: 5% 5% 0 5%;
 }
-.sideButtonsBlock {
+.side-menu__buttons-section {
     height: 100vh;
     position: fixed;
     width: 20%;
 }
-
 .button {
     font-size: 1.5em;
     font-family: 'Dancing Script', cursive;
     border: 1px solid #000000;
-    padding: 15px 15px;
-    margin: 10px;    
     width: 90%;
     color: #708090;
     box-shadow: 0 0 2px 1px #bdbdbd;
     background: linear-gradient(180deg, #eef3ca 50%, #f1f578 100%);
-}       
+}
+.side-menu__button {
+    margin: 10px;
+    padding: 15px 15px;
+}
 .button:hover {      
     color: #a52a2a;
     background: linear-gradient(180deg, #FCFFE6 50%, #E6E6E6 100%);
 }
-.tablePage {
+.table-page {
     display: flex;
     margin: auto;
 }
@@ -52,18 +52,17 @@ body {
     font-size: 2em;
     color: #630c63;
     font-weight: 700;
-    margin: 20px auto;
     text-align: center;
-    font-family: 'Indie Flower';
+    font-family: 'Indie Flower', cursive;
+    padding: 20px 0 20px;
 }
-
-.tablePage__table {
+.table-section__table {
     margin: auto 10px;
     border: 1px solid #000000;
     height: 100vh;
     text-align: center;
 }
-.tablePage__table th {
+.table-section__table th {
     font-weight: 600;
     font-size: 1.3em;
     font-family: 'Indie Flower', cursive;
@@ -72,48 +71,35 @@ body {
     padding: 10px;
     color: #2b2b8d;
 }
-.tablePage__table td {
+.table-section__table td {
     border: 1px solid #000000;
 }
-
-.addFormPage {
+.form-page {
     background-color: #d3d3d3;
     display: flex;
     height: 100vh;
 }
-.addFormPage__formBlock {
+.form-page__form-section {
     width: 100%;
     padding-left: 20%;
 }
-.addFormPage__form {
+.form-section__form {
     text-align: center;
 }
-.addFormPage__title {
-    font-weight: 700;
-    font-size: 1.7em;
-    font-family: 'Indie Flower', cursive;
-    padding-top: 20px;
-}
-
-.addFormPage__label-timeStart,
-.addFormPage__label-date,
-.addFormPage__label-timeEnd { 
+.form-section__label-time-start,
+.form-section__label-date,
+.form-section__label-time-end { 
     font-size: 1.3em;
     font-weight: 500;
     font-family: 'Indie Flower', cursive;
     padding-left: 5%;
 }
-
-.addFormPage__sendButton {
-    border: 1px solid #000000;
+.form-section__send-button {
     padding: 15px 15px;
-    margin: 10px auto 10px 25%;
+    margin: 10px auto 10px 5%;
     width: 50%;
-    color: #708090;
-    box-shadow: 0 0 2px 1px #bdbdbd;
-    background: linear-gradient(180deg, #eef3ca 50%, #f1f578 100%);
 }
-.addFormPage__sendButton:hover {
+.form-section__send-button:hover {
     color: #266fb8;
     background: linear-gradient(180deg, #abe979 50%, #56ec51 100%);
 }
@@ -121,10 +107,10 @@ body {
     justify-content: center;
     align-items: center;
 }
-.addFormPage__textArea-wrapper {
+.form-section__text-area-wrapper {
     margin: auto 5%;
 }
-.addFormPage__textArea-theme {
+.form-section__text-area-theme {
     min-width: 60%;
     max-width: 100%;
     min-height: 50px;
