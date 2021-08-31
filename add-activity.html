@@ -4,56 +4,56 @@
             <meta charset="utf-8">
             <title>Progress of skills add</title>
         <link rel="stylesheet" href="css/style.css">
-</head>
-<body>  
-    <div class="wrapper">
-        <div class="form-page">
-            <div class="form-page__side-menu side-menu">
-                <object class="side-menu__buttons-section" type="text/html" data="side-buttons.html"></object>
-            </div>
-            <div class="form-page__form-section form-section">
-                <form class="form-section__form">
-                    <fieldset class="form-section__fieldset">
-                        <legend class="form-section__title title">
-                            Добавить активность
-                        </legend>
-                        <p>
-                            <label class="form-section__label-date" for="date">
-                                Дата
-                            </label>
-                            <input required type="date" id="date" placeholder="Дата" size="50">
-                        </p>
-                        <p>
-                            <label class="form-section__label-time-start" for="start-time">
-                                Время начала
-                            </label>
-                            <input required type="time" id="start-time">
+    </head>
+    <body>  
+        <div class="wrapper">
+            <div class="form-page">
+                <div class="form-page__side-menu side-menu">
+                    <object class="side-menu__buttons-section" type="text/html" data="side-buttons.html"></object>
+                </div>
+                <div class="form-page__form-section form-section">
+                    <form class="form-section__form">
+                        <fieldset class="form-section__fieldset">
+                            <legend class="form-section__title title">
+                                Добавить активность
+                            </legend>
+                            <p>
+                                <label class="form-section__label-date" for="date">
+                                    Дата
+                                </label>
+                                <input required type="date" id="date" placeholder="Дата" size="50">
                             </p>
-                        <p>
-                            <label class="form-section__label-time-end" for="end-time">
-                                Время окончания
-                            </label>
-                            <input required type="time" id="end-time">
-                        </p>
-                            <div class="form-section__text-area-wrapper">
-                                <textarea 
-                                    class="form-section__text-area-theme" 
-                                    cols="0"
-                                    rows="10"
-                                    name="theme"
-                                    placeholder="Тема и твои впечатления"
-                                    onfocus="if(this.value==this.defaultValue)this.value='';" 
-                                    onblur="if(this.value=='')this.value=this.defaultValue;">
-                                        Тема и твои впечатления
-                                </textarea>
-                            </div>
-                    </fieldset>
-                    <div class="button__wrapper">
-                    <input class="form-section__send-button button" type="submit" value="Отправить">
-                    </div>
-                </form>
+                            <p>
+                                <label class="form-section__label-time-start" for="start-time">
+                                    Время начала
+                                </label>
+                                <input required type="time" id="start-time">
+                                </p>
+                            <p>
+                                <label class="form-section__label-time-end" for="end-time">
+                                    Время окончания
+                                </label>
+                                <input required type="time" id="end-time">
+                            </p>
+                                <div class="form-section__textarea-wrapper">
+                                    <textarea 
+                                        id="form-section__textarea" 
+                                        class="form-section__textarea-theme"
+                                        cols="0"
+                                        rows="10"
+                                        name="theme"
+                                        placeholder="Тема и твои впечатления">
+                                            Тема и твои впечатления
+                                    </textarea>
+                                </div>
+                        </fieldset>
+                        <div class="button__wrapper">
+                        <input class="form-section__send-button button" type="submit" value="Отправить">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+        <script src="js/TextareaEvents.js"></script>
+    </body>
 </html>

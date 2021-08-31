@@ -107,10 +107,10 @@ body {
     justify-content: center;
     align-items: center;
 }
-.form-section__text-area-wrapper {
+.form-section__textarea-wrapper {
     margin: auto 5%;
 }
-.form-section__text-area-theme {
+.form-section__textarea-theme {
     min-width: 60%;
     max-width: 100%;
     min-height: 50px;

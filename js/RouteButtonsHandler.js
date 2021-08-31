@@ -1,3 +1,5 @@
+
+console.log('hello');
 let myActivityBtn = document.querySelector('.my-activity__button');
 myActivityBtn.addEventListener('click', function() {
     window.parent.location = 'index.html';
