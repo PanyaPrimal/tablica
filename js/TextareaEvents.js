@@ -1,5 +1,5 @@
 
-function textareaEvents(id) {
+function addFormEventListeners(id) {
     let field = document.getElementById(id);
     field.onfocus = function () {
         if (this.value == this.defaultValue) {
@@ -12,5 +12,5 @@ function textareaEvents(id) {
         } 
     };
 }
-textareaEvents('form-section__textarea');
+addFormEventListeners('form-section__textarea');
 
