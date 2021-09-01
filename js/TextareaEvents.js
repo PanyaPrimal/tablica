@@ -2,13 +2,13 @@
 function addFormEventListeners(id) {
     let field = document.getElementById(id);
     field.onfocus = function () {
-        if (this.value == this.defaultValue) {
+        if (this.value == placeholder) {
             this.value = '';
         }
     };
     field.onblur = function () {
         if (this.value == '') {
-            this.value = this.defaultValue;
+            this.value = placeholder;
         } 
     };
 }
