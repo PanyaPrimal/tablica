@@ -13,7 +13,7 @@
                 </div>
                 <div class="form-page__form-section form-section">
                     <form class="form-section__form">
-                        <fieldset class="form-section__fieldset">
+                        <p class="form-section__fieldset">
                             <legend class="form-section__title title">
                                 Добавить активность
                             </legend>
@@ -21,8 +21,19 @@
                                 <label class="form-section__label-date" for="date">
                                     Дата
                                 </label>
-                                <input required type="date" id="date" placeholder="Дата" size="50">
+                                <input required type="date" id="formSectionDate" placeholder="Дата" size="50">
                             </p>
+                            <p>
+                                <div class="form-section__textarea-wrapper">
+                                    <textarea 
+                                        id="formSectionTextarea" 
+                                        class="form-section__textarea-theme"
+                                        cols="0"
+                                        rows="10"
+                                        placeholder="Тема и твои впечатления"></textarea>
+                                </div>
+                            </p>
+                            <!--
                             <p>
                                 <label class="form-section__label-time-start" for="start-time">
                                     Время начала
@@ -44,14 +55,88 @@
                                         name="theme"
                                         placeholder="Тема и твои впечатления"></textarea>
                                 </div>
+                            -->
+                            <div class="button__wrapper">
+                                <input class="form-section__send-button button" id="formSectionBtn" type="submit" value="Отправить">
+                            </div>
                         </fieldset>
-                        <div class="button__wrapper">
-                            <input class="form-section__send-button button" type="submit" value="Отправить">
-                        </div>
+                        <fieldset style="padding: 0 0 300px 0;">
+                            <legend>Some bullshit</legend>
+                            <div id="lsOutput"></div>
+                        </fieldset>
                     </form>
                 </div>
             </div>
         </div>
-        <script src="js/TextareaEvents.js"></script>
+        <script type="text/javascript">
+
+            const inpDate = document.getElementById('formSectionDate');
+            const inpText = document.getElementById('formSectionTextarea');
+            const btnInsert = document.getElementById('formSectionBtn');
+            const lsOutput = document.getElementById('lsOutput');
+
+            btnInsert.onclick = function (e) {
+                
+                const date1 = inpDate.value;
+                const text1 = inpText.value;
+
+                console.log(date1);
+                console.log(text1);
+
+                if (date1 && text1) {
+                    localStorage.setItem(date1, text1);
+                }
+                
+                e.preventDefault();
+
+                inpDate.value = '';
+                inpText.value = '';
+
+
+                lsOutput.innerHTML += `${date1}: ${text1}<br />`;
+            
+            };
+
+            let tableData = JSON.parse(localStorage.getItem('tableData'));
+            tableData = tableData ? tableData : [];
+            tableData.push({date: date1, description: text1});
+
+            localStorage.setItem('tableData', JSON.stringify(tableData));
+
+
+
+/*
+            function store1(){
+                let inputDate1 = document.getElementById("date1");
+                localStorage.setItem("date1", inputDate1.value);
+            }
+
+            function store(){
+               let inputDate2 = document.getElementById('date');
+               localStorage.setItem('date2', inputDate2.value);
+            }
+            let date1 = localStorage.getItem(inputDate1);
+            let date2 = localStorage.getItem(inputDate2);
+
+            //let formDate = localStorage.getItem('date');
+            //console.log(inputDate);
+            //localStorage.clear();
+*/
+        /* 
+                
+        function storeDate(){
+            let inputDate = document.getElementById('date');
+            localStorage.setItem('date', inputDate.value);
+        }
+        localStorage.setItem('inputDate', JSON.stringify(object));
+        storeDate();
+        let storedValue = localStorage.getItem(inputDate);
+        console.log(storedValue);
+
+
+        // onclick="store()"
+        */ 
+        </script>
+        <!--<script src="js/formPageEvents.js"></script>-->
     </body>
 </html>
