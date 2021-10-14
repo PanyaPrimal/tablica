@@ -21,7 +21,20 @@
                                 <label class="form-section__label-date" for="date">
                                     Дата
                                 </label>
-                                <input required type="date" id="formSectionDate" placeholder="Дата" size="50">
+                                <input type="date" id="formSectionDate" placeholder="Дата" size="50">
+                            </p>
+
+                            <p>
+                                <label class="form-section__label-time-start" for="start-time">
+                                    Время начала
+                                </label>
+                                <input type="time" id="startTime">
+                                </p>
+                            <p>
+                                <label class="form-section__label-time-end" for="end-time">
+                                    Время окончания
+                                </label>
+                                <input type="time" id="endTime">
                             </p>
                             <p>
                                 <div class="form-section__textarea-wrapper">
@@ -33,29 +46,6 @@
                                         placeholder="Тема и твои впечатления"></textarea>
                                 </div>
                             </p>
-                            <!--
-                            <p>
-                                <label class="form-section__label-time-start" for="start-time">
-                                    Время начала
-                                </label>
-                                <input required type="time" id="start-time">
-                                </p>
-                            <p>
-                                <label class="form-section__label-time-end" for="end-time">
-                                    Время окончания
-                                </label>
-                                <input required type="time" id="end-time">
-                            </p>
-                                <div class="form-section__textarea-wrapper">
-                                    <textarea 
-                                        id="form-section__textarea" 
-                                        class="form-section__textarea-theme"
-                                        cols="0"
-                                        rows="10"
-                                        name="theme"
-                                        placeholder="Тема и твои впечатления"></textarea>
-                                </div>
-                            -->
                             <div class="button__wrapper">
                                 <input class="form-section__send-button button" id="formSectionBtn" type="submit" value="Отправить">
                             </div>
@@ -71,72 +61,57 @@
         <script type="text/javascript">
 
             const inpDate = document.getElementById('formSectionDate');
+            const inpStart = document.getElementById('startTime');
+            const inpEnd = document.getElementById('endTime');
             const inpText = document.getElementById('formSectionTextarea');
             const btnInsert = document.getElementById('formSectionBtn');
-            const lsOutput = document.getElementById('lsOutput');
+            const storedList = JSON.parse(localStorage.getItem('list'));
+            let list = storedList ? storedList : [];
 
-            btnInsert.onclick = function (e) {
-                
+            btnInsert.onclick = function(e) {
+                e.preventDefault();
                 const date1 = inpDate.value;
+                const start1 = inpStart.value;
+                const end1 = inpEnd.value;
                 const text1 = inpText.value;
 
-                console.log(date1);
-                console.log(text1);
-
-                if (date1 && text1) {
-                    localStorage.setItem(date1, text1);
+                let begin = start1;
+                let finish = end1;
+                let getDate = (string) => new Date(0, 0,0, string.split(':')[0], string.split(':')[1]);
+                let different = (getDate(finish) - getDate(begin));
+                let differentRes, hours, minutes;
+                if(different > 0) {
+                    differentRes = different;
+                    hours = Math.floor((differentRes % 86400000) / 3600000);
+                    minutes = Math.round(((differentRes % 86400000) % 3600000) / 60000);
+                } else {
+                    differentRes = Math.abs((getDate(begin) - getDate(finish)));
+                    hours = Math.floor(24 - (differentRes % 86400000) / 3600000);
+                    minutes = Math.round(60 - ((differentRes % 86400000) % 3600000) / 60000);
                 }
-                
-                e.preventDefault();
+                const duration1 = hours + ':' + minutes;
+
+                if (date1 && start1 && end1 && text1) {
+                    const item = {date : date1, start : start1, end : end1, text : text1, duration : duration1};
+                    
+                    list.push(item);
+
+                    localStorage.setItem('list', JSON.stringify(list));
+                    console.log('list', JSON.parse(localStorage.getItem('list')));
+                    
+                } else {
+                    alert('Заполни все поля!');
+                }
 
                 inpDate.value = '';
                 inpText.value = '';
-
-
-                lsOutput.innerHTML += `${date1}: ${text1}<br />`;
-            
+                inpStart.value = '';
+                inpEnd.value = '';
             };
-
-            let tableData = JSON.parse(localStorage.getItem('tableData'));
-            tableData = tableData ? tableData : [];
-            tableData.push({date: date1, description: text1});
-
-            localStorage.setItem('tableData', JSON.stringify(tableData));
-
-
-
-/*
-            function store1(){
-                let inputDate1 = document.getElementById("date1");
-                localStorage.setItem("date1", inputDate1.value);
-            }
-
-            function store(){
-               let inputDate2 = document.getElementById('date');
-               localStorage.setItem('date2', inputDate2.value);
-            }
-            let date1 = localStorage.getItem(inputDate1);
-            let date2 = localStorage.getItem(inputDate2);
-
-            //let formDate = localStorage.getItem('date');
-            //console.log(inputDate);
-            //localStorage.clear();
-*/
-        /* 
-                
-        function storeDate(){
-            let inputDate = document.getElementById('date');
-            localStorage.setItem('date', inputDate.value);
-        }
-        localStorage.setItem('inputDate', JSON.stringify(object));
-        storeDate();
-        let storedValue = localStorage.getItem(inputDate);
-        console.log(storedValue);
-
-
-        // onclick="store()"
-        */ 
+            
         </script>
-        <!--<script src="js/formPageEvents.js"></script>-->
+        <!--<script src="js/formPageEvents.js"></script>
+        -->
+        
     </body>
 </html>

@@ -17,7 +17,7 @@
                         <h1 class="table-section__title title">
                             История одного Виктора
                         </h1>
-                        <table class="table-section__table" cellspacing="0" cellpadding="0">
+                        <table class="table-section__table" id="tbody" cellspacing="0" cellpadding="0">
                             <tr>
                                 <th>Дата</th>
                                 <th>Тема</th>
@@ -25,79 +25,30 @@
                                 <th>Окончание</th>
                                 <th>Длительность</th>
                             </tr>
-                            <tr>
-                                <td>[Дата</td>
-                                <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi repudiandae ipsa esse quos suscipit dolorem totam dolore. Eligendi voluptatum tenetur doloremque vero accusamus unde architecto odio consequatur pariatur. Ex, impedit!</td>
-                                <td>Время</td>
-                                <td>Время</td>
-                                <td>Длительность</td>
-                            </tr>
-                            <tr>
-                                <td>[Дата</td>
-                                <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis distinctio dicta quibusdam quasi minima nesciunt corrupti vel error nihil consequuntur, minus earum, recusandae aspernatur praesentium eos voluptas deserunt quidem fuga.</td>
-                                <td>Время</td>
-                                <td>Время</td>
-                                <td>Длительность</td>
-                            </tr>
-                            <tr>
-                                <td>[Дата</td>
-                                <td>Тема</td>
-                                <td>Время</td>
-                                <td>Время</td>
-                                <td>Длительность</td>
-                            </tr>
-                            <tr>
-                                <td>[Дата</td>
-                                <td>Тема</td>
-                                <td>Время</td>
-                                <td>Время</td>
-                                <td>Длительность</td>
-                            </tr>
-                            <tr>
-                                <td>[Дата</td>
-                                <td>Тема</td>
-                                <td>Время</td>
-                                <td>Время</td>
-                                <td>Длительность</td>
-                            </tr>
-                            <tr>
-                                <td>[Дата</td>
-                                <td>Тема</td>
-                                <td>Время</td>
-                                <td>Время</td>
-                                <td>Длительность</td>
-                            </tr>
-                            <tr>
-                                <td>[Дата</td>
-                                <td>Тема</td>
-                                <td>Время</td>
-                                <td>Время</td>
-                                <td>Длительность</td>
-                            </tr>
-                            <tr>
-                                <td>[Дата</td>
-                                <td>Тема</td>
-                                <td>Время</td>
-                                <td>Время</td>
-                                <td>Длительность</td>
-                            </tr>
-                            <tr>
-                                <td>[Дата</td>
-                                <td>Тема</td>
-                                <td>Время</td>
-                                <td>Время</td>
-                                <td>Длительность</td>
-                            </tr>
-                            <tr>
-                                <td>[Дата</td>
-                                <td>Тема</td>
-                                <td>Время</td>
-                                <td>Время</td>
-                                <td>Длительность</td>
-                            </tr>
                         </table>
                 </div>
             </div>
         </div>
+        <script> 
+            const tableBody = document.getElementById('tbody');
+            let list = JSON.parse(localStorage.getItem('list'));
+            
+            list = list ? list : [];
+
+            list.forEach(item => {
+                let row = 
+                `<tr>
+                    <td>${item.date}</td>
+                    <td>${item.text}</td>
+                    <td>${item.start}</td>
+                    <td>${item.end}</td>
+                    <td>${item.duration}</td>
+                </tr>`;
+                tableBody.insertAdjacentHTML("beforeend", row);
+            })
+            
+        </script>
+        <!--<script src="js/formPageEvents.js">
+        -->
     </body>
 </html>
