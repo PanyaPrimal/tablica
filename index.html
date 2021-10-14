@@ -18,19 +18,20 @@
                             История одного Виктора
                         </h1>
                         <table class="table-section__table" id="tbody" cellspacing="0" cellpadding="0">
-                            <tr>
+                            <tr id="tableHeader">
                                 <th>Дата</th>
                                 <th>Тема</th>
                                 <th>Начало</th>
                                 <th>Окончание</th>
                                 <th>Длительность</th>
                             </tr>
+                            <tr ></tr>
                         </table>
                 </div>
             </div>
         </div>
         <script> 
-            const tableBody = document.getElementById('tbody');
+            const tableBody = document.getElementById('tableHeader');
             let list = JSON.parse(localStorage.getItem('list'));
             
             list = list ? list : [];
@@ -44,11 +45,13 @@
                     <td>${item.end}</td>
                     <td>${item.duration}</td>
                 </tr>`;
-                tableBody.insertAdjacentHTML("beforeend", row);
+                tableBody.insertAdjacentHTML("afterend", row);
             })
             
         </script>
         <!--<script src="js/formPageEvents.js">
+        
+        
         -->
     </body>
 </html>
