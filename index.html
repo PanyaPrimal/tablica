@@ -25,28 +25,59 @@
                                 <th>Окончание</th>
                                 <th>Длительность</th>
                             </tr>
-                            <tr ></tr>
                         </table>
                 </div>
             </div>
         </div>
         <script> 
-            const tableBody = document.getElementById('tableHeader');
-            let list = JSON.parse(localStorage.getItem('list'));
-            
-            list = list ? list : [];
+        
+            function generateTable() {
+                const tableBody = document.querySelector('#tbody>tbody');
+                let list = JSON.parse(localStorage.getItem('list'));
+                tableBody.setAttribute("id","tableRow");
+                
+                list = list ? list : [];
 
-            list.forEach(item => {
-                let row = 
-                `<tr>
-                    <td>${item.date}</td>
-                    <td>${item.text}</td>
-                    <td>${item.start}</td>
-                    <td>${item.end}</td>
-                    <td>${item.duration}</td>
-                </tr>`;
-                tableBody.insertAdjacentHTML("afterend", row);
-            })
+                list.forEach((item, index) => {
+                    let deleteButton = document.createElement('button');
+                    deleteButton.setAttribute("id","deleteButton");
+                    deleteButton.innerHTML = 'x';
+                    deleteButton.onclick = function(){
+                       if (confirm('You really want to delete this activity?')) {
+                            list.splice(index, 1);
+                            localStorage.setItem('list', JSON.stringify(list));
+                            location.reload();
+                       }
+                       return false;
+                    };
+
+                    let tr = document.createElement('tr');
+                    let tdDate = document.createElement('td');
+                    let tdText = document.createElement('td');
+                    let tdStart = document.createElement('td');
+                    let tdEnd = document.createElement('td');
+                    let tdDuration = document.createElement('td');
+                    tdDate.innerHTML = item.date;
+                    tdText.innerHTML = item.text;
+                    tdStart.innerHTML = item.start;
+                    tdEnd.innerHTML = item.end;
+                    tdDuration.innerHTML = item.duration;
+                    
+                    let tdActions = document.createElement('td');
+                    tdActions.appendChild(deleteButton);
+                    
+                    tr.appendChild(tdDate);
+                    tr.appendChild(tdText);
+                    tr.appendChild(tdStart);
+                    tr.appendChild(tdEnd);
+                    tr.appendChild(tdDuration);
+                    tr.appendChild(tdActions);
+                    
+                    tableBody.appendChild(tr);
+                })
+            };
+
+            generateTable();
             
         </script>
         <!--<script src="js/formPageEvents.js">
