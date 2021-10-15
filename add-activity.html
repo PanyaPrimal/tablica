@@ -50,57 +50,49 @@
                                 <input class="form-section__send-button button" id="formSectionBtn" type="submit" value="Отправить">
                             </div>
                         </fieldset>
-                        <fieldset style="padding: 0 0 300px 0;">
-                            <legend>Some bullshit</legend>
-                            <div id="lsOutput"></div>
-                        </fieldset>
                     </form>
                 </div>
             </div>
         </div>
         <script type="text/javascript">
-
-            const inpDate = document.getElementById('formSectionDate');
-            const inpStart = document.getElementById('startTime');
-            const inpEnd = document.getElementById('endTime');
-            const inpText = document.getElementById('formSectionTextarea');
+        
+            const inputDateElement = document.getElementById('formSectionDate');
+            const inputStartElement = document.getElementById('startTime');
+            const inputEndElement = document.getElementById('endTime');
+            const inputTextElement = document.getElementById('formSectionTextarea');
             const btnInsert = document.getElementById('formSectionBtn');
             const storedList = JSON.parse(localStorage.getItem('list'));
             let list = storedList ? storedList : [];
 
             btnInsert.onclick = function(e) {
                 e.preventDefault();
-                const date1 = inpDate.value;
-                const start1 = inpStart.value;
-                const end1 = inpEnd.value;
-                const text1 = inpText.value;
+                const date = inputDateElement.value;
+                const start = inputStartElement.value;
+                const end = inputEndElement.value;
+                const text = inputTexElementt.value;
 
-                let begin = start1;
-                let finish = end1;
                 let getDate = (string) => new Date(0, 0,0, string.split(':')[0], string.split(':')[1]);
-                let different = (getDate(finish) - getDate(begin));
-                let differentRes, hours, minutes;
-                if(different > 0) {
-                    differentRes = different;
-                    hours = Math.floor((differentRes % 86400000) / 3600000);
-                    minutes = Math.round(((differentRes % 86400000) % 3600000) / 60000);
+                let differentWithoutAbs = (getDate(end) - getDate(start));
+                let different = Math.abs(differentWithoutAbs);
+                const MillisecondsInHour = 3600000;
+                let hours, minutes;
+                if(differentWithoutAbs > 0) {
+                    hours = Math.floor(different / MillisecondsInHour);
+                    minutes = Math.round((different % MillisecondsInHour) / 60000);
                 } else {
-                    differentRes = Math.abs((getDate(begin) - getDate(finish)));
-                    hours = Math.floor(24 - (differentRes % 86400000) / 3600000);
-                    minutes = Math.round(60 - ((differentRes % 86400000) % 3600000) / 60000);
+                    hours = Math.floor(24 - different / MillisecondsInHour);
+                    minutes = Math.round(60 - ((different % MillisecondsInHour) / 60000));
                 }
-                const duration1 = hours + ':' + minutes;
 
-                if (date1 && start1 && end1 && text1) {
-                    const item = {date : date1, start : start1, end : end1, text : text1, duration : duration1};
-                    
+                const duration = `${hours < 10 ? '0' : ''}${hours}` + ':' + `${minutes < 10 ? '0' : ''}${minutes}`;
+                console.log(duration);
+
+                if (date && start && end && text) {
+                    const item = {date, start, end, text, duration};
                     list.push(item);
-
                     localStorage.setItem('list', JSON.stringify(list));
-                    console.log('list', JSON.parse(localStorage.getItem('list')));
-                    
                 } else {
-                    alert('Заполни все поля!');
+                    alert('Fill in all the fields! ');
                 }
 
                 inpDate.value = '';
