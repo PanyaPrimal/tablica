@@ -74,6 +74,7 @@ body {
     color: #2b2b8d;
 }
 .table-section__table td {
+    font-weight: 400;
     border: 1px solid #000000;
 }
 .form-page {
@@ -119,3 +120,32 @@ body {
     height: 100%;
     width: 100%;
 }
+
+#tableRow {
+    font-size: 1.3em;
+    color:#0c4c8b;
+}
+
+#deleteButton {
+    font-size: 1.1em;
+    border: 1px solid #000000;
+    color: #000000;
+    padding: 10px;
+    margin: 0 10px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #ff0000 40%, #030000 100%);
+    content:'X'; 
+}
+#deleteButton:hover {
+    font-size: 1.1em;
+    border: 1px solid #bb0000;
+    color: #e00000;
+    border-radius: 0%;
+    background: linear-gradient(180deg, #ffffff 50%, #030000 100%);
+    transition: ease 1s;
+    transform: rotate(90deg);
+    /*text-transform: uppercase; 
+}
+
+/* переделать стили на заполнение фона
+сделать ячейки тд на флексе, а не %
