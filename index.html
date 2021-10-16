@@ -14,23 +14,26 @@
                     <object class="side-menu__buttons-section" type="text/html" data="side-buttons.html"></object>
                 </div>
                 <div class="table-page__content table-section">
-                        <h1 class="table-section__title title">
+                        <h1 contenteditable class="table-section__title title" id="forEdit">
                             История одного Виктора
                         </h1>
+                            <button id="saveChangesButton" style="font-size: large; background-color: green; padding: 10px;">Save</button>
+                        
                         <table class="table-section__table" id="tbody" cellspacing="0" cellpadding="0">
-                            <tr id="tableHeader">
+                            <tr id="tableHeader" class="tableHeader">
                                 <th>Дата</th>
                                 <th>Тема</th>
                                 <th>Начало</th>
                                 <th>Окончание</th>
                                 <th>Длительность</th>
+                                <th>Действия</th>
                             </tr>
                         </table>
                 </div>
             </div>
         </div>
         <script> 
-        
+
             function generateTable() {
                 const tableBody = document.querySelector('#tbody>tbody');
                 let list = JSON.parse(localStorage.getItem('list'));
@@ -40,8 +43,13 @@
 
                 list.forEach((item, index) => {
                     let deleteButton = document.createElement('button');
+                    let editButton = document.createElement('button');
+                    deleteButton.setAttribute("class","deleteButton");
                     deleteButton.setAttribute("id","deleteButton");
-                    deleteButton.innerHTML = 'x';
+                    editButton.setAttribute("class","saveChangesButton");
+                    editButton.setAttribute("id","saveChangesButton");
+                    deleteButton.innerHTML = 'X';
+                    editButton.innerHTML = '&#9998;';
                     deleteButton.onclick = function(){
                        if (confirm('You really want to delete this activity?')) {
                             list.splice(index, 1);
@@ -57,6 +65,19 @@
                     let tdStart = document.createElement('td');
                     let tdEnd = document.createElement('td');
                     let tdDuration = document.createElement('td');
+
+                    tdDate.setAttribute("id","forEdit");
+                    tdText.setAttribute("id","forEdit");
+                    tdStart.setAttribute("id","forEdit");
+                    tdEnd.setAttribute("id","forEdit");
+
+                    tdDate.setAttribute('contenteditable', '');
+                    tdText.setAttribute('contenteditable', '');
+                    tdStart.setAttribute('contenteditable', '');
+                    tdEnd.setAttribute('contenteditable', '');
+
+                    tdText.setAttribute('class', 'tdText');
+
                     tdDate.innerHTML = item.date;
                     tdText.innerHTML = item.text;
                     tdStart.innerHTML = item.start;
@@ -65,6 +86,7 @@
                     
                     let tdActions = document.createElement('td');
                     tdActions.appendChild(deleteButton);
+                    tdActions.appendChild(editButton);
                     
                     tr.appendChild(tdDate);
                     tr.appendChild(tdText);
@@ -78,6 +100,31 @@
             };
 
             generateTable();
+
+            // Это нужно как-то сделать функцию конкретно к каждой клетке, в душе не и пу как. 
+            // кубик должен сохранять изменения во временный массив, или как только мышка выходит с него, если на него было нажатие, а если изменений нет, то ничего не записывает.
+            // на саму страницу все изменения пушатся в основной массив только после нажатия на кнопку.
+            // бред ипаный, слишком много сегодня сидел за пекой, глаза пекут((((((((=))))))))
+
+
+            let elementForEdit = document.getElementById('forEdit'),
+                saveButtonElement = document.querySelector('#saveChangesButton');
+                console.log(saveButtonElement);
+
+            let saveToLocalStorage = function() {
+                    localStorage.setItem('item', elementForEdit.innerHTML);
+                };
+
+            saveButtonElement.addEventListener('click', function() {
+                saveToLocalStorage();
+                console.log(localStorage.getItem('item'));
+
+                    elementForEdit.innerHTML = localStorage.getItem('item');
+            });
+            let crap = function() {
+                elementForEdit.innerHTML = localStorage.getItem('item');
+            };
+            crap();
             
         </script>
         <!--<script src="js/formPageEvents.js">
