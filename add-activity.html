@@ -56,26 +56,27 @@
         </div>
         <script type="text/javascript">
         
-            const inputDateElement = document.getElementById('formSectionDate');
-            const inputStartElement = document.getElementById('startTime');
-            const inputEndElement = document.getElementById('endTime');
-            const inputTextElement = document.getElementById('formSectionTextarea');
-            const btnInsert = document.getElementById('formSectionBtn');
-            const storedList = JSON.parse(localStorage.getItem('list'));
+            const inputDateElement = document.getElementById('formSectionDate'),
+                inputStartElement = document.getElementById('startTime'),
+                inputEndElement = document.getElementById('endTime'),
+                inputTextElement = document.getElementById('formSectionTextarea'),
+                btnInsert = document.getElementById('formSectionBtn'),
+                storedList = JSON.parse(localStorage.getItem('list'));
             let list = storedList ? storedList : [];
 
             btnInsert.onclick = function(e) {
                 e.preventDefault();
-                const date = inputDateElement.value;
-                const start = inputStartElement.value;
-                const end = inputEndElement.value;
-                const text = inputTexElementt.value;
+                const date = inputDateElement.value,
+                      start = inputStartElement.value,
+                      end = inputEndElement.value,
+                      text = inputTextElement.value;
 
-                let getDate = (string) => new Date(0, 0,0, string.split(':')[0], string.split(':')[1]);
-                let differentWithoutAbs = (getDate(end) - getDate(start));
-                let different = Math.abs(differentWithoutAbs);
-                const MillisecondsInHour = 3600000;
-                let hours, minutes;
+                let getDate = (string) => new Date(0, 0,0, string.split(':')[0], string.split(':')[1]),
+                    differentWithoutAbs = (getDate(end) - getDate(start)),
+                    different = Math.abs(differentWithoutAbs),
+                    hours, minutes,
+                    MillisecondsInHour = 3600000;
+
                 if(differentWithoutAbs > 0) {
                     hours = Math.floor(different / MillisecondsInHour);
                     minutes = Math.round((different % MillisecondsInHour) / 60000);
@@ -85,7 +86,6 @@
                 }
 
                 const duration = `${hours < 10 ? '0' : ''}${hours}` + ':' + `${minutes < 10 ? '0' : ''}${minutes}`;
-                console.log(duration);
 
                 if (date && start && end && text) {
                     const item = {date, start, end, text, duration};
@@ -95,10 +95,10 @@
                     alert('Fill in all the fields! ');
                 }
 
-                inpDate.value = '';
-                inpText.value = '';
-                inpStart.value = '';
-                inpEnd.value = '';
+                inputDateElement.value = '';
+                inputStartElement.value = '';
+                inputEndElement.value = '';
+                inputTextElement.value = '';
             };
             
         </script>
