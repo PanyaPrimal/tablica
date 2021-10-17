@@ -14,10 +14,9 @@
                     <object class="side-menu__buttons-section" type="text/html" data="side-buttons.html"></object>
                 </div>
                 <div class="table-page__content table-section">
-                        <h1 contenteditable class="table-section__title title" id="forEdit">
+                        <h1 contenteditable class="table-section__title title">
                             История одного Виктора
                         </h1>
-                            <button id="saveChangesButton" style="font-size: large; background-color: green; padding: 10px;">Save</button>
                         
                         <table class="table-section__table" id="tbody" cellspacing="0" cellpadding="0">
                             <tr id="tableHeader" class="tableHeader">
@@ -34,6 +33,38 @@
         </div>
         <script> 
 
+            function updateItem(tr, index) {
+                let cells = tr.getElementsByTagName('td');
+                let item = {
+                    date: cells[0].textContent,
+                    text: cells[1].textContent,
+                    start: cells[2].textContent,
+                    end: cells[3].textContent,
+                    duration: cells[4].textContent,
+                };
+                
+                let list = JSON.parse(localStorage.getItem('list'));
+                list.splice(index, 1, item);
+                localStorage.setItem('list', JSON.stringify(list));
+
+                
+            };
+            function cancelEdit(tr, item) {
+                console.log('tr', tr);
+                console.log('item', item);
+
+                
+                let cells = tr.getElementsByTagName('td');
+
+                cells.innerHTML = '';
+
+                cells[0].innerHTML = item.date;
+                cells[1].innerHTML = item.text;
+                cells[2].innerHTML = item.start;
+                cells[3].innerHTML = item.end;
+                cells[4].innerHTML = item.duration;
+            };
+
             function generateTable() {
                 const tableBody = document.querySelector('#tbody>tbody');
                 let list = JSON.parse(localStorage.getItem('list'));
@@ -44,10 +75,8 @@
                 list.forEach((item, index) => {
                     let deleteButton = document.createElement('button');
                     let editButton = document.createElement('button');
-                    deleteButton.setAttribute("class","deleteButton");
-                    deleteButton.setAttribute("id","deleteButton");
-                    editButton.setAttribute("class","saveChangesButton");
-                    editButton.setAttribute("id","saveChangesButton");
+                    deleteButton.setAttribute("class", "deleteButton");
+                    editButton.setAttribute("class", "saveChangesButton");
                     deleteButton.innerHTML = 'X';
                     editButton.innerHTML = '&#9998;';
                     deleteButton.onclick = function(){
@@ -65,16 +94,48 @@
                     let tdStart = document.createElement('td');
                     let tdEnd = document.createElement('td');
                     let tdDuration = document.createElement('td');
+                    let tdActions = document.createElement('td');
 
-                    tdDate.setAttribute("id","forEdit");
-                    tdText.setAttribute("id","forEdit");
-                    tdStart.setAttribute("id","forEdit");
-                    tdEnd.setAttribute("id","forEdit");
+                    editButton.onclick = function() {
+                        tdDate.setAttribute('contenteditable', '');
+                        tdText.setAttribute('contenteditable', '');
+                        tdStart.setAttribute('contenteditable', '');
+                        tdEnd.setAttribute('contenteditable', '');
 
-                    tdDate.setAttribute('contenteditable', '');
-                    tdText.setAttribute('contenteditable', '');
-                    tdStart.setAttribute('contenteditable', '');
-                    tdEnd.setAttribute('contenteditable', '');
+                        tdActions.innerHTML = '';
+                        let saveButton = document.createElement('button');
+                        let cancelButton = document.createElement('button');
+
+                        saveButton.setAttribute("class", "save-button");
+                        cancelButton.setAttribute("class", "cancel-changes-button");
+
+                        saveButton.innerHTML = '&#128190;';
+                        cancelButton.innerHTML = '&#128473;';
+
+                        saveButton.onclick = function() {
+                            updateItem(tr, index);
+                            tdActions.innerHTML = '';
+                            tdActions.appendChild(deleteButton);
+                            tdActions.appendChild(editButton);
+                            tdDate.removeAttribute('contenteditable');
+                            tdText.removeAttribute('contenteditable');
+                            tdStart.removeAttribute('contenteditable');
+                            tdEnd.removeAttribute('contenteditable');
+                        }
+                        cancelButton.onclick = function() {
+                            cancelEdit(tr, list[index]);
+
+                        }
+
+                        tdActions.appendChild(saveButton);
+                        tdActions.appendChild(cancelButton);
+
+                        
+                    }
+
+                    
+
+                    
 
                     tdText.setAttribute('class', 'tdText');
 
@@ -84,7 +145,6 @@
                     tdEnd.innerHTML = item.end;
                     tdDuration.innerHTML = item.duration;
                     
-                    let tdActions = document.createElement('td');
                     tdActions.appendChild(deleteButton);
                     tdActions.appendChild(editButton);
                     
@@ -107,6 +167,11 @@
             // бред ипаный, слишком много сегодня сидел за пекой, глаза пекут((((((((=))))))))
 
 
+            
+        </script>
+        <!--<script src="js/formPageEvents.js">
+        
+        
             let elementForEdit = document.getElementById('forEdit'),
                 saveButtonElement = document.querySelector('#saveChangesButton');
                 console.log(saveButtonElement);
@@ -125,11 +190,6 @@
                 elementForEdit.innerHTML = localStorage.getItem('item');
             };
             crap();
-            
-        </script>
-        <!--<script src="js/formPageEvents.js">
-        
-        
         -->
     </body>
 </html>

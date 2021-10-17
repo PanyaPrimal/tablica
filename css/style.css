@@ -76,6 +76,7 @@ body {
 
 .table-section__table td {
     border: 1px solid #000000;
+    max-width: 200px;
 }
 
 .tdText {
@@ -165,4 +166,20 @@ body {
     background: #ffffff;
     transition: ease 1s;
     transform: rotate(90deg);
+}
+.save-button {
+    font-size: 1.1em;
+    color: #000000;
+    padding: 10px;
+    margin: 0 10px;
+    border-radius: 50%;
+    background-color: #22d8c9;
+}
+.cancel-changes-button {
+    font-size: 1.1em;
+    color: #000000;
+    padding: 10px;
+    margin: 0 10px;
+    border-radius: 50%;
+    background-color: #d89822;
 }
