@@ -1,113 +1,195 @@
 <!DOCTYPE HTML>
 <html>
- <head>
-  <meta charset="utf-8">
-  <title>Progress of skills info
-  </title>
-  <style>
-    @import url('https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower&display=swap');
-    .menu-wrap {
-      height: 100vh;
-    }
-    body {
-      margin: 0px;
-    }
-    .main-part {
-      width: 80%;
-      background-color: grey;
-    }
-  </style>
-</head>
-<body>
-	<div class="table-page" style="display: flex;">	
-		<div class="menu-wrap">
-      <object type="text/html" data="side-buttons.html" style="height: 100%; overflow: hidden;"></object>
-    </div>
-		<div class="main-part">
-			<div class="name-of" style="font-size: 2em; color: purple; font-weight: 800; margin-top: 20px; margin-bottom: 20px; margin-left: 50px; font-family: 'Indie Flower', cursive;">История одного Виктора</div>
-			<table border="5" cellspacing="0" cellpadding="15" width="90%" height="100vh">
-   				<tr style="font-weight: 600; font-size: 1.5em; font-family: 'Indie Flower', cursive;">
-    				<th style="width: 10%">Дата</th>
-    				<th style="width: 60%">Тема </th>
-    				<td style="width: 10%">Время начала</td>
-   				 	<td style="width: 10%">Время окончания</td>
-   				 	<td style="width: 10%">Длительность</td>
-   				</tr>
-  				 <tr>
-   				 	<td></td>
-   				 	<td></td>
-   				 	<td></td>
-   				 	<td></td>
-   				 	<td></td>
-  				</tr>
-  				 <tr>
-   				 	<td></td>
-   				 	<td></td>
-   				 	<td></td>
-   				 	<td></td>
-   				 	<td></td>
-  				</tr>
-  				 <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-  			     <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-  				<tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Progress of skills info
+        </title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="table-page">	
+                <div class="table-page__side-menu side-menu">
+                    <object class="side-menu__buttons-section" type="text/html" data="side-buttons.html"></object>
+                </div>
+                <div class="table-page__content table-section">
+                        <h1 contenteditable class="table-section__title title">
+                            История одного Виктора
+                        </h1>
+                        
+                        <table class="table-section__table" id="tbody" cellspacing="0" cellpadding="0">
+                            <tr id="tableHeader" class="tableHeader">
+                                <th>Дата</th>
+                                <th>Тема</th>
+                                <th>Начало</th>
+                                <th>Окончание</th>
+                                <th>Длительность</th>
+                                <th>Действия</th>
+                            </tr>
+                        </table>
+                </div>
+            </div>
+        </div>
+        <script> 
 
-		</div>
-</div>
-<div class="form-page">
-	<div class="side-menu"></div>
-<object data="side-menu"></object>
-	</div>
-</body>
+            function updateItem(tr, index) {
+                let cells = tr.getElementsByTagName('td');
+                let item = {
+                    date: cells[0].textContent,
+                    text: cells[1].textContent,
+                    start: cells[2].textContent,
+                    end: cells[3].textContent,
+                    duration: cells[4].textContent,
+                };
+                
+                let list = JSON.parse(localStorage.getItem('list'));
+                list.splice(index, 1, item);
+                localStorage.setItem('list', JSON.stringify(list));
+
+                
+            };
+            function cancelEdit(tr, item) {
+                console.log('tr', tr);
+                console.log('item', item);
+
+                
+                let cells = tr.getElementsByTagName('td');
+
+                cells.innerHTML = '';
+
+                cells[0].innerHTML = item.date;
+                cells[1].innerHTML = item.text;
+                cells[2].innerHTML = item.start;
+                cells[3].innerHTML = item.end;
+                cells[4].innerHTML = item.duration;
+            };
+
+            function generateTable() {
+                const tableBody = document.querySelector('#tbody>tbody');
+                let list = JSON.parse(localStorage.getItem('list'));
+                tableBody.setAttribute("id","tableRow");
+                
+                list = list ? list : [];
+
+                list.forEach((item, index) => {
+                    let deleteButton = document.createElement('button');
+                    let editButton = document.createElement('button');
+                    deleteButton.setAttribute("class", "deleteButton");
+                    editButton.setAttribute("class", "saveChangesButton");
+                    deleteButton.innerHTML = 'X';
+                    editButton.innerHTML = '&#9998;';
+                    deleteButton.onclick = function(){
+                       if (confirm('You really want to delete this activity?')) {
+                            list.splice(index, 1);
+                            localStorage.setItem('list', JSON.stringify(list));
+                            location.reload();
+                       }
+                       return false;
+                    };
+
+                    let tr = document.createElement('tr');
+                    let tdDate = document.createElement('td');
+                    let tdText = document.createElement('td');
+                    let tdStart = document.createElement('td');
+                    let tdEnd = document.createElement('td');
+                    let tdDuration = document.createElement('td');
+                    let tdActions = document.createElement('td');
+
+                    editButton.onclick = function() {
+                        tdDate.setAttribute('contenteditable', '');
+                        tdText.setAttribute('contenteditable', '');
+                        tdStart.setAttribute('contenteditable', '');
+                        tdEnd.setAttribute('contenteditable', '');
+
+                        tdActions.innerHTML = '';
+                        let saveButton = document.createElement('button');
+                        let cancelButton = document.createElement('button');
+
+                        saveButton.setAttribute("class", "save-button");
+                        cancelButton.setAttribute("class", "cancel-changes-button");
+
+                        saveButton.innerHTML = '&#128190;';
+                        cancelButton.innerHTML = '&#128473;';
+
+                        saveButton.onclick = function() {
+                            updateItem(tr, index);
+                            tdActions.innerHTML = '';
+                            tdActions.appendChild(deleteButton);
+                            tdActions.appendChild(editButton);
+                            tdDate.removeAttribute('contenteditable');
+                            tdText.removeAttribute('contenteditable');
+                            tdStart.removeAttribute('contenteditable');
+                            tdEnd.removeAttribute('contenteditable');
+                        }
+                        cancelButton.onclick = function() {
+                            cancelEdit(tr, list[index]);
+
+                        }
+
+                        tdActions.appendChild(saveButton);
+                        tdActions.appendChild(cancelButton);
+
+                        
+                    }
+
+                    
+
+                    
+
+                    tdText.setAttribute('class', 'tdText');
+
+                    tdDate.innerHTML = item.date;
+                    tdText.innerHTML = item.text;
+                    tdStart.innerHTML = item.start;
+                    tdEnd.innerHTML = item.end;
+                    tdDuration.innerHTML = item.duration;
+                    
+                    tdActions.appendChild(deleteButton);
+                    tdActions.appendChild(editButton);
+                    
+                    tr.appendChild(tdDate);
+                    tr.appendChild(tdText);
+                    tr.appendChild(tdStart);
+                    tr.appendChild(tdEnd);
+                    tr.appendChild(tdDuration);
+                    tr.appendChild(tdActions);
+                    
+                    tableBody.appendChild(tr);
+                })
+            };
+
+            generateTable();
+
+            // Это нужно как-то сделать функцию конкретно к каждой клетке, в душе не и пу как. 
+            // кубик должен сохранять изменения во временный массив, или как только мышка выходит с него, если на него было нажатие, а если изменений нет, то ничего не записывает.
+            // на саму страницу все изменения пушатся в основной массив только после нажатия на кнопку.
+            // бред ипаный, слишком много сегодня сидел за пекой, глаза пекут((((((((=))))))))
+
+
+            
+        </script>
+        <!--<script src="js/formPageEvents.js">
+        
+        
+            let elementForEdit = document.getElementById('forEdit'),
+                saveButtonElement = document.querySelector('#saveChangesButton');
+                console.log(saveButtonElement);
+
+            let saveToLocalStorage = function() {
+                    localStorage.setItem('item', elementForEdit.innerHTML);
+                };
+
+            saveButtonElement.addEventListener('click', function() {
+                saveToLocalStorage();
+                console.log(localStorage.getItem('item'));
+
+                    elementForEdit.innerHTML = localStorage.getItem('item');
+            });
+            let crap = function() {
+                elementForEdit.innerHTML = localStorage.getItem('item');
+            };
+            crap();
+        -->
+    </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+            <meta charset="utf-8">
+            <title>Progress of skills add</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>  
+        <div class="wrapper">
+            <div class="form-page">
+                <div class="form-page__side-menu side-menu">
+                    <object class="side-menu__buttons-section" type="text/html" data="side-buttons.html"></object>
+                </div>
+                <div class="form-page__form-section form-section">
+                    <form class="form-section__form">
+                        <p class="form-section__fieldset">
+                            <legend class="form-section__title title">
+                                Добавить активность
+                            </legend>
+                            <p>
+                                <label class="form-section__label-date" for="date">
+                                    Дата
+                                </label>
+                                <input type="date" id="formSectionDate" placeholder="Дата" size="50">
+                            </p>
+
+                            <p>
+                                <label class="form-section__label-time-start" for="start-time">
+                                    Время начала
+                                </label>
+                                <input type="time" id="startTime">
+                                </p>
+                            <p>
+                                <label class="form-section__label-time-end" for="end-time">
+                                    Время окончания
+                                </label>
+                                <input type="time" id="endTime">
+                            </p>
+                            <p>
+                                <div class="form-section__textarea-wrapper">
+                                    <textarea 
+                                        id="formSectionTextarea" 
+                                        class="form-section__textarea-theme"
+                                        cols="0"
+                                        rows="10"
+                                        placeholder="Тема и твои впечатления"></textarea>
+                                </div>
+                            </p>
+                            <div class="button__wrapper">
+                                <input class="form-section__send-button button" id="formSectionBtn" type="submit" value="Отправить">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+        
+            const inputDateElement = document.getElementById('formSectionDate'),
+                inputStartElement = document.getElementById('startTime'),
+                inputEndElement = document.getElementById('endTime'),
+                inputTextElement = document.getElementById('formSectionTextarea'),
+                btnInsert = document.getElementById('formSectionBtn'),
+                storedList = JSON.parse(localStorage.getItem('list'));
+            let list = storedList ? storedList : [];
+
+            btnInsert.onclick = function(e) {
+                e.preventDefault();
+                const date = inputDateElement.value,
+                      start = inputStartElement.value,
+                      end = inputEndElement.value,
+                      text = inputTextElement.value;
+
+                let getDate = (string) => new Date(0, 0,0, string.split(':')[0], string.split(':')[1]),
+                    differentWithoutAbs = (getDate(end) - getDate(start)),
+                    different = Math.abs(differentWithoutAbs),
+                    hours, minutes,
+                    MillisecondsInHour = 3600000;
+
+                if(differentWithoutAbs > 0) {
+                    hours = Math.floor(different / MillisecondsInHour);
+                    minutes = Math.round((different % MillisecondsInHour) / 60000);
+                } else {
+                    hours = Math.floor(24 - different / MillisecondsInHour);
+                    minutes = Math.round(60 - ((different % MillisecondsInHour) / 60000));
+                }
+
+                const duration = `${hours < 10 ? '0' : ''}${hours}` + ':' + `${minutes < 10 ? '0' : ''}${minutes}`;
+
+                if (date && start && end && text) {
+                    const item = {date, start, end, text, duration};
+                    list.push(item);
+                    localStorage.setItem('list', JSON.stringify(list));
+                } else {
+                    alert('Fill in all the fields! ');
+                }
+
+                inputDateElement.value = '';
+                inputStartElement.value = '';
+                inputEndElement.value = '';
+                inputTextElement.value = '';
+            };
+            
+        </script>
+        <!--<script src="js/formPageEvents.js"></script>
+        -->
+        
+    </body>
+</html>
